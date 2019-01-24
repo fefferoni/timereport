@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TimeReport.Data\TimeReport.Data.csproj" />
+    <ProjectReference Include="..\TimeReport.Repository\TimeReport.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
