@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using TimeReport.Service;
 using TimeReport.Web.Api.Models;
 
 namespace TimeReport.Web.Api.Controllers
@@ -8,11 +10,22 @@ namespace TimeReport.Web.Api.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
+        private readonly ITaskService taskService;
+        private readonly IMapper mapper;
+
+        public TasksController(ITaskService taskService, IMapper mapper)
+        {
+            this.taskService = taskService;
+            this.mapper = mapper;
+        }
+
         // GET: api/Tasks
         [HttpGet]
         public ActionResult<IEnumerable<TaskModel>> Get()
         {
-            return new [] { new TaskModel { Name = "The first task" }, new TaskModel { Name = "The second task" } };
+            var results = taskService.GetTasks();
+            TaskModel[] models = mapper.Map<TaskModel[]>(results);
+            return models;
         }
 
         // GET: api/Tasks/5

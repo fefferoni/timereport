@@ -1,0 +1,2 @@
+﻿dotnet ef database update --project "TimeReport.Repository" --startup-project "TimeReportApi"
+dotnet ef migrations add [Migration name] --project "TimeReport.Repository" --startup-project "TimeReportApi"
