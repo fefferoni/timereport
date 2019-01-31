@@ -51,6 +51,21 @@ namespace TimeReport.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
                 {
@@ -172,7 +187,7 @@ namespace TimeReport.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Task",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -180,18 +195,77 @@ namespace TimeReport.Repository.Migrations
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: true)
+                    ProjectId = table.Column<int>(nullable: true),
+                    CreatedById = table.Column<string>(nullable: true),
+                    CustomerId = table.Column<int>(nullable: true),
+                    Goal = table.Column<string>(nullable: true),
+                    Background = table.Column<string>(nullable: true),
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    EndDateTime = table.Column<DateTime>(nullable: false),
+                    TimeType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.PrimaryKey("PK_Task", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_Projects_ProjectId",
+                        name: "FK_Task_AspNetUsers_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Task_Customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Task_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "TimeReport",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    TimeWorked = table.Column<double>(nullable: false),
+                    TaskId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TimeReport", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TimeReport_Task_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "Task",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TimeReport_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Task",
+                columns: new[] { "Id", "Background", "CreatedById", "CustomerId", "DateCreated", "DateModified", "EndDateTime", "Goal", "Name", "ProjectId", "StartDateTime", "TimeType" },
+                values: new object[] { 1, "Testing of a new feature in our system.", null, null, new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 2, 1, 0, 0, 0, 0, DateTimeKind.Local), "Complete regression tests.", "White-box testing", null, new DateTime(2019, 1, 30, 0, 0, 0, 0, DateTimeKind.Local), 1 });
+
+            migrationBuilder.InsertData(
+                table: "Task",
+                columns: new[] { "Id", "Background", "CreatedById", "CustomerId", "DateCreated", "DateModified", "EndDateTime", "Goal", "Name", "ProjectId", "StartDateTime", "TimeType" },
+                values: new object[] { 2, "Dashboard needs lazy loading.", null, null, new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 2, 14, 0, 0, 0, 0, DateTimeKind.Local), "Development complete.", "Lazy loading", null, new DateTime(2019, 1, 24, 0, 0, 0, 0, DateTimeKind.Local), 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -233,9 +307,29 @@ namespace TimeReport.Repository.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ProjectId",
-                table: "Tasks",
+                name: "IX_Task_CreatedById",
+                table: "Task",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Task_CustomerId",
+                table: "Task",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Task_ProjectId",
+                table: "Task",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TimeReport_TaskId",
+                table: "TimeReport",
+                column: "TaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TimeReport_UserId",
+                table: "TimeReport",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -256,13 +350,19 @@ namespace TimeReport.Repository.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "TimeReport");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Task");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Customer");
 
             migrationBuilder.DropTable(
                 name: "Projects");

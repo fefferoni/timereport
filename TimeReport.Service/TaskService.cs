@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TimeReport.Data.Entities;
 using TimeReport.Repository;
@@ -9,10 +10,12 @@ namespace TimeReport.Service
     public class TaskService : ITaskService
     {
         private readonly IRepository<Task> taskRepository;
+        private readonly IRepository<Data.Entities.TimeReport> timeReportRepository;
 
-        public TaskService(IRepository<Task> taskRepository)
+        public TaskService(IRepository<Task> taskRepository, IRepository<Data.Entities.TimeReport> timeReportRepository)
         {
             this.taskRepository = taskRepository;
+            this.timeReportRepository = timeReportRepository;
         }
         public IEnumerable<Task> GetTasks()
         {
@@ -41,6 +44,11 @@ namespace TimeReport.Service
             {
                 taskRepository.Delete(task); 
             }
+        }
+
+        public IEnumerable<Data.Entities.TimeReport> GetTimeReportsForTask(int taskId)
+        {
+            return timeReportRepository.GetAll();
         }
     }
 }

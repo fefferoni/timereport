@@ -10,8 +10,8 @@ using TimeReport.Repository;
 namespace TimeReport.Repository.Migrations
 {
     [DbContext(typeof(TimeReportContext))]
-    [Migration("20190130205054_NewEntitiesAndSeed")]
-    partial class NewEntitiesAndSeed
+    [Migration("20190131211658_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -201,31 +201,31 @@ namespace TimeReport.Repository.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Task");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Background = "Testing of a new feature in our system.",
-                            DateCreated = new DateTime(2019, 1, 30, 20, 50, 53, 766, DateTimeKind.Utc).AddTicks(5231),
-                            DateModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateTime = new DateTime(2019, 1, 31, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateCreated = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
+                            DateModified = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
+                            EndDateTime = new DateTime(2019, 2, 1, 0, 0, 0, 0, DateTimeKind.Local),
                             Goal = "Complete regression tests.",
                             Name = "White-box testing",
-                            StartDateTime = new DateTime(2019, 1, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartDateTime = new DateTime(2019, 1, 30, 0, 0, 0, 0, DateTimeKind.Local),
                             TimeType = 1
                         },
                         new
                         {
                             Id = 2,
                             Background = "Dashboard needs lazy loading.",
-                            DateCreated = new DateTime(2019, 1, 30, 20, 50, 53, 769, DateTimeKind.Utc).AddTicks(3969),
-                            DateModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateTime = new DateTime(2019, 2, 13, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateCreated = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
+                            DateModified = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
+                            EndDateTime = new DateTime(2019, 2, 14, 0, 0, 0, 0, DateTimeKind.Local),
                             Goal = "Development complete.",
                             Name = "Lazy loading",
-                            StartDateTime = new DateTime(2019, 1, 23, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartDateTime = new DateTime(2019, 1, 24, 0, 0, 0, 0, DateTimeKind.Local),
                             TimeType = 0
                         });
                 });
@@ -376,7 +376,7 @@ namespace TimeReport.Repository.Migrations
 
             modelBuilder.Entity("TimeReport.Data.Entities.TimeReport", b =>
                 {
-                    b.HasOne("TimeReport.Data.Entities.Task", "Task")
+                    b.HasOne("TimeReport.Data.Entities.Task")
                         .WithMany("TimeReports")
                         .HasForeignKey("TaskId");
 

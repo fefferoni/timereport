@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TimeReport.Service;
 using TimeReport.Web.Api.Models;
@@ -12,6 +15,7 @@ namespace TimeReport.Web.Api.Controllers
     {
         private readonly ITaskService taskService;
         private readonly IMapper mapper;
+        
 
         public TasksController(ITaskService taskService, IMapper mapper)
         {
@@ -23,16 +27,34 @@ namespace TimeReport.Web.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<TaskModel>> Get()
         {
-            var results = taskService.GetTasks();
-            TaskModel[] models = mapper.Map<TaskModel[]>(results);
-            return models;
+            try
+            {
+                var results = taskService.GetTasks();
+                TaskModel[] models = mapper.Map<TaskModel[]>(results);
+                return models;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         // GET: api/Tasks/5
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<TaskModel> Get(int id)
         {
-            return new TaskModel{ Name = $"The first task id: {id}" };
+            try
+            {
+                var result = taskService.GetTask(id);
+                //var reports = taskService.GetTimeReportsForTask(id).ToList();
+                if (result == null)
+                    return NotFound();
+                return mapper.Map<TaskModel>(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         // POST: api/Tasks

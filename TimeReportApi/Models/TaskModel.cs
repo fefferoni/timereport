@@ -9,8 +9,7 @@ namespace TimeReport.Web.Api.Models
     public class TaskModel
     {
         public string Name { get; set; }
-        public string CreatedByFirstName { get; set; }
-        public string CreatedByLastName { get; set; }
+        public UserModel CreatedBy { get; set; }
         public string CustomerName { get; set; }
         public string Goal { get; set; }
         public string Background { get; set; }
