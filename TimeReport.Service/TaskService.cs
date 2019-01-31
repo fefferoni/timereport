@@ -45,10 +45,5 @@ namespace TimeReport.Service
                 taskRepository.Delete(task); 
             }
         }
-
-        public IEnumerable<Data.Entities.TimeReport> GetTimeReportsForTask(int taskId)
-        {
-            return timeReportRepository.GetAll();
-        }
     }
 }

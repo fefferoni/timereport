@@ -12,6 +12,5 @@ namespace TimeReport.Service
         void InsertTask(Task task);
         void UpdateTask(Task task);
         void DeleteTask(int id);
-        IEnumerable<Data.Entities.TimeReport> GetTimeReportsForTask(int taskId);
     }
 }
