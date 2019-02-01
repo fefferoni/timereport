@@ -5,11 +5,15 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.Web.Api", "TimeReportApi\TimeReport.Web.Api.csproj", "{6D5CB663-B70D-4480-A0C4-9E237B085BC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.Data", "TimeReport.Data\TimeReport.Data.csproj", "{74D00B9D-90C3-4DBF-BA0E-D200A9BC3E29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.Data", "TimeReport.Data\TimeReport.Data.csproj", "{74D00B9D-90C3-4DBF-BA0E-D200A9BC3E29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.Repository", "TimeReport.Repository\TimeReport.Repository.csproj", "{D427EC79-7EEC-42D8-8F71-26453FBD05AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.Repository", "TimeReport.Repository\TimeReport.Repository.csproj", "{D427EC79-7EEC-42D8-8F71-26453FBD05AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.Service", "TimeReport.Service\TimeReport.Service.csproj", "{4E5F6BFB-F884-42CB-83EF-61376D92ED76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.Service", "TimeReport.Service\TimeReport.Service.csproj", "{4E5F6BFB-F884-42CB-83EF-61376D92ED76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2989313A-D645-439D-ACA0-77B8863C08B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.UnitTest", "TimeReport.UnitTest\TimeReport.UnitTest.csproj", "{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{4E5F6BFB-F884-42CB-83EF-61376D92ED76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E5F6BFB-F884-42CB-83EF-61376D92ED76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E5F6BFB-F884-42CB-83EF-61376D92ED76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE} = {2989313A-D645-439D-ACA0-77B8863C08B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8186ABE9-99FC-4D1E-9DB1-5FD13BC479DD}
