@@ -47,6 +47,8 @@ namespace TimeReport.Web.Api.Controllers
             {
                 var result = taskService.GetTask(id);
                 //var reports = taskService.GetTimeReportsForTask(id).ToList();
+                var customer = result.Customer;
+                var list = result.TimeReports.ToList();
                 if (result == null)
                     return NotFound();
                 return mapper.Map<TaskModel>(result);

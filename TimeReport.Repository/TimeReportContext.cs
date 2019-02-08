@@ -14,12 +14,16 @@ namespace TimeReport.Repository
             
         }
 
+        //public DbSet<Task> Tasks { get; set; }
+        //public DbSet<Data.Entities.TimeReport> TimeReports { get; set; }
+        //public DbSet<Customer> Customers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             var now = DateTime.UtcNow;
-            
-            builder.Entity<Task>().HasData( 
+
+            builder.Entity<Task>().HasData(
                 new
                 {
                     Id = 1,

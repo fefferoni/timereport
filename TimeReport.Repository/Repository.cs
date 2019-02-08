@@ -10,22 +10,20 @@ namespace TimeReport.Repository
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly TimeReportContext context;
-        private DbSet<T> entities;
-        string errorMessage = string.Empty;
 
         public Repository(TimeReportContext context)
         {
             this.context = context;
-            entities = context.Set<T>();
+            //entities = context.Set<T>();
         }
         public IEnumerable<T> GetAll()
         {
-            return entities.AsEnumerable();
+            return context.Set<T>().AsEnumerable();
         }
 
         public T Get(int id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return context.Set<T>().SingleOrDefault(s => s.Id == id);
         }
         public void Insert(T entity)
         {
@@ -33,7 +31,7 @@ namespace TimeReport.Repository
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            entities.Add(entity);
+            context.Set<T>().Add(entity);
             context.SaveChanges();
         }
 
@@ -52,7 +50,7 @@ namespace TimeReport.Repository
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            entities.Remove(entity);
+            context.Set<T>().Remove(entity);
             context.SaveChanges();
         }
         public void Remove(T entity)
@@ -61,7 +59,7 @@ namespace TimeReport.Repository
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            entities.Remove(entity);
+            context.Set<T>().Remove(entity);
         }
 
         public void SaveChanges()

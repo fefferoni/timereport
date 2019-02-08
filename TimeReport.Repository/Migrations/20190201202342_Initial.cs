@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TimeReport.Repository.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,7 @@ namespace TimeReport.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Projects",
+                name: "Project",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -77,7 +77,7 @@ namespace TimeReport.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.PrimaryKey("PK_Project", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,7 +187,7 @@ namespace TimeReport.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "Tasks",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -206,29 +206,29 @@ namespace TimeReport.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.Id);
+                    table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Task_AspNetUsers_CreatedById",
+                        name: "FK_Tasks_AspNetUsers_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Task_Customer_CustomerId",
+                        name: "FK_Tasks_Customer_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Task_Projects_ProjectId",
+                        name: "FK_Tasks_Project_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Projects",
+                        principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TimeReport",
+                name: "TimeReports",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -242,30 +242,20 @@ namespace TimeReport.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeReport", x => x.Id);
+                    table.PrimaryKey("PK_TimeReports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TimeReport_Task_TaskId",
+                        name: "FK_TimeReports_Tasks_TaskId",
                         column: x => x.TaskId,
-                        principalTable: "Task",
+                        principalTable: "Tasks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TimeReport_AspNetUsers_UserId",
+                        name: "FK_TimeReports_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Task",
-                columns: new[] { "Id", "Background", "CreatedById", "CustomerId", "DateCreated", "DateModified", "EndDateTime", "Goal", "Name", "ProjectId", "StartDateTime", "TimeType" },
-                values: new object[] { 1, "Testing of a new feature in our system.", null, null, new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 2, 1, 0, 0, 0, 0, DateTimeKind.Local), "Complete regression tests.", "White-box testing", null, new DateTime(2019, 1, 30, 0, 0, 0, 0, DateTimeKind.Local), 1 });
-
-            migrationBuilder.InsertData(
-                table: "Task",
-                columns: new[] { "Id", "Background", "CreatedById", "CustomerId", "DateCreated", "DateModified", "EndDateTime", "Goal", "Name", "ProjectId", "StartDateTime", "TimeType" },
-                values: new object[] { 2, "Dashboard needs lazy loading.", null, null, new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047), new DateTime(2019, 2, 14, 0, 0, 0, 0, DateTimeKind.Local), "Development complete.", "Lazy loading", null, new DateTime(2019, 1, 24, 0, 0, 0, 0, DateTimeKind.Local), 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -307,28 +297,28 @@ namespace TimeReport.Repository.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_CreatedById",
-                table: "Task",
+                name: "IX_Tasks_CreatedById",
+                table: "Tasks",
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_CustomerId",
-                table: "Task",
+                name: "IX_Tasks_CustomerId",
+                table: "Tasks",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_ProjectId",
-                table: "Task",
+                name: "IX_Tasks_ProjectId",
+                table: "Tasks",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TimeReport_TaskId",
-                table: "TimeReport",
+                name: "IX_TimeReports_TaskId",
+                table: "TimeReports",
                 column: "TaskId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TimeReport_UserId",
-                table: "TimeReport",
+                name: "IX_TimeReports_UserId",
+                table: "TimeReports",
                 column: "UserId");
         }
 
@@ -350,13 +340,13 @@ namespace TimeReport.Repository.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "TimeReport");
+                name: "TimeReports");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Task");
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -365,7 +355,7 @@ namespace TimeReport.Repository.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Project");
         }
     }
 }

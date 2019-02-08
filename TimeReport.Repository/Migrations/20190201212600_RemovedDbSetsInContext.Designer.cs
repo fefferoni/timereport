@@ -10,8 +10,8 @@ using TimeReport.Repository;
 namespace TimeReport.Repository.Migrations
 {
     [DbContext(typeof(TimeReportContext))]
-    [Migration("20190131211658_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20190201212600_RemovedDbSetsInContext")]
+    partial class RemovedDbSetsInContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,7 +162,7 @@ namespace TimeReport.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Project");
                 });
 
             modelBuilder.Entity("TimeReport.Data.Entities.Task", b =>
@@ -208,24 +208,24 @@ namespace TimeReport.Repository.Migrations
                         {
                             Id = 1,
                             Background = "Testing of a new feature in our system.",
-                            DateCreated = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
-                            DateModified = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
-                            EndDateTime = new DateTime(2019, 2, 1, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateCreated = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
+                            DateModified = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
+                            EndDateTime = new DateTime(2019, 2, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             Goal = "Complete regression tests.",
                             Name = "White-box testing",
-                            StartDateTime = new DateTime(2019, 1, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartDateTime = new DateTime(2019, 1, 31, 0, 0, 0, 0, DateTimeKind.Local),
                             TimeType = 1
                         },
                         new
                         {
                             Id = 2,
                             Background = "Dashboard needs lazy loading.",
-                            DateCreated = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
-                            DateModified = new DateTime(2019, 1, 31, 21, 16, 57, 999, DateTimeKind.Utc).AddTicks(9047),
-                            EndDateTime = new DateTime(2019, 2, 14, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateCreated = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
+                            DateModified = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
+                            EndDateTime = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             Goal = "Development complete.",
                             Name = "Lazy loading",
-                            StartDateTime = new DateTime(2019, 1, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartDateTime = new DateTime(2019, 1, 25, 0, 0, 0, 0, DateTimeKind.Local),
                             TimeType = 0
                         });
                 });

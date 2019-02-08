@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimeReport.Repository;
 
 namespace TimeReport.Repository.Migrations
 {
     [DbContext(typeof(TimeReportContext))]
-    partial class TimeReportContextModelSnapshot : ModelSnapshot
+    [Migration("20190201205852_Customers")]
+    partial class Customers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,7 +145,7 @@ namespace TimeReport.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("TimeReport.Data.Entities.Project", b =>
@@ -199,33 +201,7 @@ namespace TimeReport.Repository.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Task");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Background = "Testing of a new feature in our system.",
-                            DateCreated = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
-                            DateModified = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
-                            EndDateTime = new DateTime(2019, 2, 2, 0, 0, 0, 0, DateTimeKind.Local),
-                            Goal = "Complete regression tests.",
-                            Name = "White-box testing",
-                            StartDateTime = new DateTime(2019, 1, 31, 0, 0, 0, 0, DateTimeKind.Local),
-                            TimeType = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Background = "Dashboard needs lazy loading.",
-                            DateCreated = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
-                            DateModified = new DateTime(2019, 2, 1, 21, 26, 0, 260, DateTimeKind.Utc).AddTicks(4826),
-                            EndDateTime = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Local),
-                            Goal = "Development complete.",
-                            Name = "Lazy loading",
-                            StartDateTime = new DateTime(2019, 1, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            TimeType = 0
-                        });
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("TimeReport.Data.Entities.TimeReport", b =>
@@ -252,7 +228,7 @@ namespace TimeReport.Repository.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TimeReport");
+                    b.ToTable("TimeReports");
                 });
 
             modelBuilder.Entity("TimeReport.Data.Entities.User", b =>
