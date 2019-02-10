@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Logging;
 using TimeReport.Data.Entities;
 using TimeReport.Repository;
 
@@ -9,40 +10,83 @@ namespace TimeReport.Service
 {
     public class TaskService : ITaskService
     {
-        private readonly IRepository<Task> taskRepository;
-        private readonly IRepository<Data.Entities.TimeReport> timeReportRepository;
+        private readonly ITaskRepository taskRepository;
+        private readonly ILogger<TaskService> logger;
 
-        public TaskService(IRepository<Task> taskRepository, IRepository<Data.Entities.TimeReport> timeReportRepository)
+        public TaskService(ITaskRepository taskRepository, ILogger<TaskService> logger)
         {
             this.taskRepository = taskRepository;
-            this.timeReportRepository = timeReportRepository;
+            this.logger = logger;
         }
         public IEnumerable<Task> GetTasks()
         {
-            return taskRepository.GetAll();
+            try
+            {
+                return taskRepository.GetAll();
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"Failed to get tasks: {exception}");
+                throw;
+            }
         }
 
         public Task GetTask(int id)
         {
-            return taskRepository.Get(id);
+            try
+            {
+                return taskRepository.Get(id);
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"Failed to get Task for id: {id} exception: {exception}");
+                throw;
+            }
         }
 
         public void InsertTask(Task task)
         {
-            taskRepository.Insert(task);
+            try
+            {
+                taskRepository.Insert(task);
+                logger.LogInformation($"InsertTask {task}");
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"Failed to insert task: {exception}");
+                throw;
+            }
         }
 
         public void UpdateTask(Task task)
         {
-            taskRepository.Update(task);
+            try
+            {
+                logger.LogInformation($"Updating task {task}");
+                taskRepository.Update(task);
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"Failed to update task: {exception}");
+                throw;
+            }
         }
 
         public void DeleteTask(int id)
         {
-            var task = GetTask(id);
-            if (task != null)
+            try
             {
-                taskRepository.Delete(task); 
+                logger.LogInformation($"Deleting task for id: {id}");
+                var task = GetTask(id);
+                if (task != null)
+                {
+                    taskRepository.Delete(task);
+                }
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"Failed to delete task: {exception}");
+                throw;
             }
         }
     }

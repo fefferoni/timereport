@@ -7,36 +7,36 @@ using TimeReport.Data.Entities;
 
 namespace TimeReport.Repository
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class TaskRepository : ITaskRepository
     {
         private readonly TimeReportContext context;
 
-        public Repository(TimeReportContext context)
+        public TaskRepository(TimeReportContext context)
         {
             this.context = context;
-            //entities = context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<Task> GetAll()
         {
-            return context.Set<T>().AsEnumerable();
+            return context.Tasks.AsEnumerable();
         }
 
-        public T Get(int id)
+        public Task Get(int id)
         {
-            return context.Set<T>().SingleOrDefault(s => s.Id == id);
+            return context.Tasks.SingleOrDefault(s => s.Id == id);
         }
-        public void Insert(T entity)
+        public void Insert(Task entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            context.Set<T>().Add(entity);
+            context.Tasks.Add(entity);
             context.SaveChanges();
         }
 
-        public void Update(T entity)
+        public void Update(Task entity)
         {
+            throw new NotImplementedException();
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
@@ -44,24 +44,16 @@ namespace TimeReport.Repository
             context.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public void Delete(Task entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            context.Set<T>().Remove(entity);
+            context.Tasks.Remove(entity);
             context.SaveChanges();
         }
-        public void Remove(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            context.Set<T>().Remove(entity);
-        }
-
+        
         public void SaveChanges()
         {
             context.SaveChanges();

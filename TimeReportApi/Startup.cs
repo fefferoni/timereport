@@ -22,9 +22,9 @@ namespace TimeReport.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient<ITaskService, TaskService>();
             services.AddDbContext<TimeReportContext>(cfg => cfg.UseSqlServer(Configuration.GetConnectionString("TimeReportConnectionString")));
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddTransient<ITaskService, TaskService>();
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
