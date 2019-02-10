@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TimeReport.Data.Entities;
 using TimeReport.Service;
 using TimeReport.Web.Api.Models;
-using TimeReport = TimeReport.Data.Entities.TimeReport;
 
 namespace TimeReport.Web.Api.Controllers
 {
@@ -82,7 +80,7 @@ namespace TimeReport.Web.Api.Controllers
 
         // POST: api/Tasks
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(string value)
         {
         }
 
