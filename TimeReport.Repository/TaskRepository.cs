@@ -17,12 +17,12 @@ namespace TimeReport.Repository
         }
         public IEnumerable<Task> GetAll()
         {
-            return context.Tasks.AsEnumerable();
+            return context.Tasks.Include(task => task.TimeReports).AsEnumerable();
         }
 
         public Task Get(int id)
         {
-            return context.Tasks.SingleOrDefault(s => s.Id == id);
+            return context.Tasks.Include(task => task.TimeReports).SingleOrDefault(s => s.Id == id);
         }
         public void Insert(Task entity)
         {
