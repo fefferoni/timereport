@@ -45,28 +45,6 @@ namespace TimeReport.Web.Api.Controllers
         {
             try
             {
-                //var now = DateTime.Now;
-                //var newTask = new Task
-                //{
-                //    Background = "bg",
-                //    Customer = new Customer {DateCreated = now, DateModified = now, Name = "Google Inc."},
-                //    Name = "The first task",
-                //    DateCreated = now,
-                //    DateModified = now,
-                //    StartDateTime = now.AddDays(-7),
-                //    EndDateTime = now.AddDays(7),
-                //    Goal = "Be done with it",
-                //    TimeType = TimeType.FixedPrice,
-                //    TimeReports = new List<Data.Entities.TimeReport>
-                //    {
-                //        new Data.Entities.TimeReport
-                //            {DateCreated = now, DateModified = now, Date = now.AddDays(-1).Date, TimeWorked = 2},
-                //        new Data.Entities.TimeReport
-                //            {DateCreated = now, DateModified = now, Date = now.Date, TimeWorked = 5}
-                //    },
-                //};
-                //taskService.InsertTask(newTask);
-
                 var result = taskService.GetTask(id);
                 if (result == null)
                     return NotFound();
