@@ -6,7 +6,7 @@ using TimeReport.Data.Entities;
 
 namespace TimeReport.Web.Api.Models
 {
-    public class TaskModel
+    public class TaskModel : BaseModel
     {
         public string Name { get; set; }
         public UserModel CreatedBy { get; set; }
@@ -16,7 +16,7 @@ namespace TimeReport.Web.Api.Models
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public TimeType TimeType { get; set; }
-        public ICollection<Data.Entities.TimeReport> TimeReports { get; set; }
+        public ICollection<TimeReportModel> TimeReports { get; set; }
         // TODO! Lägg till automapper och bygg klart några api metoder för taskcontroller. Kör med param includeTimeReports
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using TimeReport.Data.Entities;
 using TimeReport.Service;
 using TimeReport.Web.Api.Models;
@@ -15,12 +16,13 @@ namespace TimeReport.Web.Api.Controllers
     {
         private readonly ITaskService taskService;
         private readonly IMapper mapper;
-        
+        private readonly LinkGenerator linkGenerator;
 
-        public TasksController(ITaskService taskService, IMapper mapper)
+        public TasksController(ITaskService taskService, IMapper mapper, LinkGenerator linkGenerator)
         {
             this.taskService = taskService;
             this.mapper = mapper;
+            this.linkGenerator = linkGenerator;
         }
 
         // GET: api/Tasks
@@ -58,8 +60,22 @@ namespace TimeReport.Web.Api.Controllers
 
         // POST: api/Tasks
         [HttpPost]
-        public void Post(string value)
+        public ActionResult<TaskModel> Post(TaskModel model)
         {
+            try
+            {
+                var task = mapper.Map<Task>(model);
+                taskService.InsertTask(task);
+
+                //var location = linkGenerator.GetPathByAction("Get", "Tasks", new {id = task.Id});
+
+                //return Created("", mapper.Map<TaskModel>(task));
+                return CreatedAtAction(nameof(Get), new { id = task.Id }, model);
+            }
+            catch (Exception exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         // PUT: api/Tasks/5

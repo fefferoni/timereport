@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeReport.Web.Api.Models
 {
-    public class UserModel
+    public class UserModel : BaseModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
