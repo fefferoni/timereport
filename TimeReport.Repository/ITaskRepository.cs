@@ -9,7 +9,7 @@ namespace TimeReport.Repository
     {
         IEnumerable<Task> GetAll();
         Task Get(int id);
-        void Insert(Task entity);
+        Task Insert(Task entity);
         void Update(Task entity);
         void Delete(Task entity);
         void SaveChanges();

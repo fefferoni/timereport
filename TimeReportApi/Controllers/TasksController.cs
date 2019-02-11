@@ -64,15 +64,10 @@ namespace TimeReport.Web.Api.Controllers
         {
             try
             {
-                var task = mapper.Map<Task>(model);
-                taskService.InsertTask(task);
-
-                //var location = linkGenerator.GetPathByAction("Get", "Tasks", new {id = task.Id});
-
-                //return Created("", mapper.Map<TaskModel>(task));
-                return CreatedAtAction(nameof(Get), new { id = task.Id }, model);
+                var newTask = taskService.InsertTask(mapper.Map<Task>(model));
+                return CreatedAtAction(nameof(Get), new { id = newTask.Id }, mapper.Map<TaskModel>(newTask));
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

@@ -13,8 +13,9 @@ namespace TimeReport.Web.Api.Models.Mapping
             this.CreateMap<Task, TaskModel>().ReverseMap().ForMember(t => t.Project, opt => opt.Ignore());
             this.CreateMap<User, UserModel>();
             this.CreateMap<Customer, CustomerModel>();
-            this.CreateMap<Data.Entities.TimeReport, TimeReportModel>().ReverseMap().
-                ForMember(t => t.TimeWorked, o => o.MapFrom(m => m.TimeWorkedInHours));
+            this.CreateMap<Data.Entities.TimeReport, TimeReportModel>().
+                ForMember(t => t.TimeWorkedInHours, o => o.MapFrom(m => m.TimeWorked)).
+                ReverseMap().ForMember(t => t.TimeWorked, o => o.MapFrom(m => m.TimeWorkedInHours));
         }
     }
 }

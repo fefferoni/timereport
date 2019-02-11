@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeReport.Data.Entities;
@@ -9,6 +10,7 @@ namespace TimeReport.Web.Api.Models
     public class TaskModel : BaseModel
     {
         public string Name { get; set; }
+        [Required]
         public UserModel CreatedBy { get; set; }
         public string CustomerName { get; set; }
         public string Goal { get; set; }

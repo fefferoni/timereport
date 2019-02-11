@@ -24,14 +24,15 @@ namespace TimeReport.Repository
         {
             return context.Tasks.Include(task => task.TimeReports).SingleOrDefault(s => s.Id == id);
         }
-        public void Insert(Task entity)
+        public Task Insert(Task entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            context.Tasks.Add(entity);
+            var result = context.Tasks.Add(entity);
             context.SaveChanges();
+            return result.Entity;
         }
 
         public void Update(Task entity)

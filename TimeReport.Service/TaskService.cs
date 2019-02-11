@@ -44,12 +44,12 @@ namespace TimeReport.Service
             }
         }
 
-        public void InsertTask(Task task)
+        public Task InsertTask(Task task)
         {
             try
             {
-                taskRepository.Insert(task);
                 logger.LogInformation($"InsertTask {task}");
+                return taskRepository.Insert(task);
             }
             catch (Exception exception)
             {
