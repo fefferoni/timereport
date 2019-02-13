@@ -24,6 +24,7 @@ namespace TimeReport.Web.Api
         {
             services.AddDbContext<TimeReportContext>(cfg => cfg.UseSqlServer(Configuration.GetConnectionString("TimeReportConnectionString")));
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddTransient<ITaskService, TaskService>();
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

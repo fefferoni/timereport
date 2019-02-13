@@ -9,10 +9,15 @@ namespace TimeReport.Web.Api.Models
 {
     public class TaskModel : BaseModel
     {
-        public string Name { get; set; }
+
         [Required]
+        [StringLength(500, MinimumLength = 3)]
+        public string Name { get; set; }
         public UserModel CreatedBy { get; set; }
+        public string ProjectName { get; set; }
+        public int ProjectId { get; set; }
         public string CustomerName { get; set; }
+        public int CustomerId { get; set; }
         public string Goal { get; set; }
         public string Background { get; set; }
         public DateTime StartDateTime { get; set; }

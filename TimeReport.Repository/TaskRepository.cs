@@ -30,6 +30,13 @@ namespace TimeReport.Repository
             {
                 throw new ArgumentNullException(nameof(entity));
             }
+
+            // Add existing customer from context so EF does not try to insert a new customer
+            if (entity.Customer != null)
+            {
+                entity.Customer = context.Customers.Find(entity.Customer.Id);
+            }
+
             var result = context.Tasks.Add(entity);
             context.SaveChanges();
             return result.Entity;
