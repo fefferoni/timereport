@@ -1,0 +1,6 @@
+Add test to verify that child entities get saved/updated when their parents are saved to context. For example Task.Customer
+
+- Try BenDay generic repo (make specific repos for the ones that need include, just override methods)
+- (Implement adapter pattern with AutoMapper. Just create Adapter classes like TaskToTaskModelAdapter and within them use automapper.) Or maybe skip this...
+- Create unit tests for adapter layer, repo layer and MAYBE service layer. Use tests like Benday..
+- Make more restful with links. Basic links from Kevins course. Like links to childre. Task has a link to get its collection of timereports for example
