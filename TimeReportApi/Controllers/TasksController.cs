@@ -65,8 +65,8 @@ namespace TimeReport.Web.Api.Controllers
             try
             {
                 var t = mapper.Map<Task>(model);
-                var newTask = taskService.InsertTask(t);
-                return CreatedAtAction(nameof(Get), new { id = newTask.Id }, mapper.Map<TaskModel>(newTask));
+                taskService.InsertTask(t);
+                return CreatedAtAction(nameof(Get), new { id = t.Id }, mapper.Map<TaskModel>(t));
             }
             catch (Exception)
             {

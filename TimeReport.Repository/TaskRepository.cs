@@ -7,24 +7,25 @@ using TimeReport.Data.Entities;
 
 namespace TimeReport.Repository
 {
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : GenericBaseRepository<Task>, IRepository<Task>
     {
         private readonly TimeReportContext context;
 
-        public TaskRepository(TimeReportContext context)
+        public TaskRepository(TimeReportContext context) : base(context)
         {
             this.context = context;
         }
-        public IEnumerable<Task> GetAll()
+        public override IEnumerable<Task> GetAll()
         {
-            return context.Tasks.Include(task => task.TimeReports).AsEnumerable();
+            return context.Tasks.Include(task => task.TimeReports).Include(task => task.Customer).AsEnumerable();
         }
 
-        public Task Get(int id)
+        public override Task Get(int id)
         {
-            return context.Tasks.Include(task => task.TimeReports).SingleOrDefault(s => s.Id == id);
+            return context.Tasks.Include(task => task.TimeReports).Include(task => task.Customer).SingleOrDefault(s => s.Id == id);
         }
-        public Task Insert(Task entity)
+
+        public override void Insert(Task entity)
         {
             if (entity == null)
             {
@@ -37,34 +38,9 @@ namespace TimeReport.Repository
                 context.Attach(entity.Customer);
             }
 
-            var result = context.Tasks.Add(entity);
-            context.SaveChanges();
-            return result.Entity;
-        }
-
-        public void Update(Task entity)
-        {
-            throw new NotImplementedException();
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
+            context.Tasks.Add(entity);
             context.SaveChanges();
         }
 
-        public void Delete(Task entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            context.Tasks.Remove(entity);
-            context.SaveChanges();
-        }
-        
-        public void SaveChanges()
-        {
-            context.SaveChanges();
-        }
     }
 }

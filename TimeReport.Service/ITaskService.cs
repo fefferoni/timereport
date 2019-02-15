@@ -9,7 +9,7 @@ namespace TimeReport.Service
     {
         IEnumerable<Task> GetTasks();
         Task GetTask(int id);
-        Task InsertTask(Task task);
+        void InsertTask(Task task);
         void UpdateTask(Task task);
         void DeleteTask(int id);
     }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TimeReport.Data.Entities;
 using TimeReport.Repository;
 using TimeReport.Service;
 
@@ -23,9 +24,9 @@ namespace TimeReport.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TimeReportContext>(cfg => cfg.UseSqlServer(Configuration.GetConnectionString("TimeReportConnectionString")));
-            services.AddScoped<ITaskRepository, TaskRepository>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<ITaskService, TaskService>();
+            services.AddScoped<IRepository<Task>, TaskRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericBaseRepository<>));
+            services.AddScoped<ITaskService, TaskService>();
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

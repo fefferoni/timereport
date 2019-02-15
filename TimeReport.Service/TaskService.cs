@@ -10,10 +10,10 @@ namespace TimeReport.Service
 {
     public class TaskService : ITaskService
     {
-        private readonly ITaskRepository taskRepository;
+        private readonly IRepository<Task> taskRepository;
         private readonly ILogger<TaskService> logger;
 
-        public TaskService(ITaskRepository taskRepository, ILogger<TaskService> logger)
+        public TaskService(IRepository<Task> taskRepository, ILogger<TaskService> logger)
         {
             this.taskRepository = taskRepository;
             this.logger = logger;
@@ -44,12 +44,12 @@ namespace TimeReport.Service
             }
         }
 
-        public Task InsertTask(Task task)
+        public void InsertTask(Task task)
         {
             try
             {
                 logger.LogInformation($"InsertTask {task}");
-                return taskRepository.Insert(task);
+                taskRepository.Insert(task);
             }
             catch (Exception exception)
             {
