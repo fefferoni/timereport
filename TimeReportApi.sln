@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.Service", "TimeR
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2989313A-D645-439D-ACA0-77B8863C08B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.UnitTest", "TimeReport.UnitTest\TimeReport.UnitTest.csproj", "{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.UnitTests", "TimeReport.UnitTest\TimeReport.UnitTests.csproj", "{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.IntegrationTests", "TimeReport.IntegrationTests\TimeReport.IntegrationTests.csproj", "{4481B73A-EFD5-42D1-BF33-74E1725E57B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +43,17 @@ Global
 		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4481B73A-EFD5-42D1-BF33-74E1725E57B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4481B73A-EFD5-42D1-BF33-74E1725E57B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4481B73A-EFD5-42D1-BF33-74E1725E57B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4481B73A-EFD5-42D1-BF33-74E1725E57B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE} = {2989313A-D645-439D-ACA0-77B8863C08B9}
+		{4481B73A-EFD5-42D1-BF33-74E1725E57B6} = {2989313A-D645-439D-ACA0-77B8863C08B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8186ABE9-99FC-4D1E-9DB1-5FD13BC479DD}
