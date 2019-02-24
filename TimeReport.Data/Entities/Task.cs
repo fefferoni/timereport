@@ -16,6 +16,11 @@ namespace TimeReport.Data.Entities
         public DateTime EndDateTime { get; set; }
         public TimeType TimeType { get; set; }
         public ICollection<TimeReport> TimeReports { get; set; }
+
+        public Task()
+        {
+            TimeReports = new List<TimeReport>();
+        }
     }
 
     public enum TimeType

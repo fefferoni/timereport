@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2989313A-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.UnitTests", "TimeReport.UnitTest\TimeReport.UnitTests.csproj", "{73C6C728-3106-4A99-BB0A-AEDAB23BE3FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReport.IntegrationTests", "TimeReport.IntegrationTests\TimeReport.IntegrationTests.csproj", "{4481B73A-EFD5-42D1-BF33-74E1725E57B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeReport.IntegrationTests", "TimeReport.IntegrationTests\TimeReport.IntegrationTests.csproj", "{4481B73A-EFD5-42D1-BF33-74E1725E57B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
