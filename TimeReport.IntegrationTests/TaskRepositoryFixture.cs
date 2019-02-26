@@ -85,7 +85,7 @@ namespace TimeReport.IntegrationTests
 
         [Fact]
         [Trait("Category","Integration.Sql")]
-        public void TaskRepository_UpdateTaskAndTimeReports()
+        public void TaskRepository_InsertTaskWithTimeReports_UpdateTaskAndTimeReports()
         {
             var expected = Task;
 
@@ -119,6 +119,82 @@ namespace TimeReport.IntegrationTests
             Assert.Equal(expected.Name, actual.Name);
             Assert.Equal(2, actual.TimeReports.Count);
             Assert.All(actual.TimeReports, report => Assert.Equal(3, report.TimeWorked));
+        }
+
+        [Fact]
+        [Trait("Category","Integration.Sql")]
+        public void TaskRepository_InsertTask_DeleteTask()
+        {
+            var expected = Task;
+
+            SystemUnderTest.Insert(expected);
+
+            Assert.True(expected.Id != 0, "Task id should not be 0.");
+
+            SystemUnderTest.Delete(expected);
+
+            systemUnderTest = null;
+
+            var actual = SystemUnderTest.Get(expected.Id);
+
+            Assert.Null(actual);
+        }
+
+        [Fact]
+        [Trait("Category","Integration.Sql")]
+        public void TaskRepository_InsertTaskWithTimeReport_DeleteTimeReport()
+        {
+            // Arrange
+            var expected = Task;
+            
+            var timeReport1 = new Data.Entities.TimeReport
+            {
+                Date = DateTime.Today,
+                TimeWorked = 7.5
+            };
+            var timeReport2 = new Data.Entities.TimeReport
+            {
+                Date = DateTime.Today,
+                TimeWorked = 6
+            };
+            
+            expected.TimeReports.Add(timeReport1);
+            expected.TimeReports.Add(timeReport2);
+
+            SystemUnderTest.Insert(expected);
+
+            Assert.True(expected.Id != 0, "Task id should not be 0.");
+
+            // Act
+            expected.TimeReports.Remove(timeReport1);
+            SystemUnderTest.Update(expected);
+
+            systemUnderTest = null;
+
+            // Assert
+            var actual = SystemUnderTest.Get(expected.Id);
+
+            Assert.Equal(1, actual.TimeReports.Count);
+        }
+
+        [Fact]
+        [Trait("Category","Integration.Sql")]
+        public void TaskRepository_InsertTask_UpdateTaskDetachedInstance()
+        {
+            // Arrange
+            var expected = Task;
+
+            SystemUnderTest.Insert(expected);
+            systemUnderTest = null;
+            expected.Name = "very modified task name";
+
+            // Act
+            SystemUnderTest.Update(expected);
+
+            // Assert
+            systemUnderTest = null;
+            var actual = SystemUnderTest.Get(expected.Id);
+            Assert.Equal(expected.Name, actual.Name);
         }
     }
 }
