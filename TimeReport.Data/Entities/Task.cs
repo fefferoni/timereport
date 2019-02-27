@@ -8,7 +8,6 @@ namespace TimeReport.Data.Entities
     {
         public string Name { get; set; }
         public Project Project { get; set; }
-        public User CreatedBy { get; set; }
         public Customer Customer { get; set; }
         public string Goal { get; set; }
         public string Background { get; set; }

@@ -13,7 +13,6 @@ namespace TimeReport.Web.Api.Models
         [Required]
         [StringLength(500, MinimumLength = 3)]
         public string Name { get; set; }
-        public UserModel CreatedBy { get; set; }
         public string ProjectName { get; set; }
         public int ProjectId { get; set; }
         public string CustomerName { get; set; }
@@ -24,6 +23,5 @@ namespace TimeReport.Web.Api.Models
         public DateTime EndDateTime { get; set; }
         public TimeType TimeType { get; set; }
         public ICollection<TimeReportModel> TimeReports { get; set; }
-        // TODO! Lägg till automapper och bygg klart några api metoder för taskcontroller. Kör med param includeTimeReports
     }
 }
