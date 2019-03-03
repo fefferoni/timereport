@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace TimeReport.Web.Api.Models
 {
-    public class UserModel : BaseModel
+    public class UserModel
     {
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
+        public string Id { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
         public string LastName { get; set; }
-        [Range(0, 168)]
         public int WorkHoursPerWeek { get; set; }
-        [EmailAddress]
         public string Email { get; set; }
     }
 }

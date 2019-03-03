@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using AutoFixture;
 using AutoMapper;
 using TimeReport.Data.Entities;
@@ -60,19 +57,7 @@ namespace TimeReport.UnitTests
             var actual = SystemUnderTest.Map<TaskModel>(expected);
             
             // Assert
-            Assert.Equal(expected.Name, actual.Name);
-            Assert.Equal(expected.Background, actual.Background);
-            Assert.Equal(expected.Customer.Id, actual.CustomerId);
-            Assert.Equal(expected.Customer.Name, actual.CustomerName);
-            Assert.Equal(expected.Goal, actual.Goal);
-            Assert.Equal(expected.TimeType, actual.TimeType);
-            Assert.Equal(expected.Project.Id, actual.ProjectId);
-            Assert.Equal(expected.Project.Name, actual.ProjectName);
-            Assert.Equal(expected.StartDateTime, actual.StartDateTime);
-            Assert.Equal(expected.EndDateTime, actual.EndDateTime);
-            Assert.Equal(expected.DateCreated, actual.DateCreated);
-            Assert.Equal(expected.DateModified, actual.DateModified);
-            Assert.Equal(expected.Id, actual.Id);
+            AssertEqual(expected, actual);
             Assert.Empty(actual.TimeReports);
         }
 
@@ -88,15 +73,58 @@ namespace TimeReport.UnitTests
 
             // Assert
             Assert.NotEmpty(expected.TimeReports);
-            Assert.Equal(expected.TimeReports, actual.TimeReports);
-            // Todo: skapa delad utility metod som assertar TimeReports. Skapa även fixture för mappning av timereport->TimereportModel.
+            var i = 0;
+            foreach (var timeReport in expected.TimeReports)
+            {
+                AssertEqual(timeReport, actual.TimeReports.ElementAt(i++));
+            }
         }
 
         [Fact]
         [Trait("Category","UnitTest.Mapping")]
-        public void MapTaskModelToTask()
+        public void MapTaskToTaskModel_Reverse()
         {
-            
+            // Arrange
+            var expected = Fixture.Create<TaskModel>();
+
+            // Act
+            var actual = SystemUnderTest.Map<Task>(expected);
+
+            // Assert
+            AssertEqual(actual, expected);
+            var i = 0;
+            foreach (var timeReport in expected.TimeReports)
+            {
+                AssertEqual(actual.TimeReports.ElementAt(i++), timeReport);
+            }
         }
+
+        private void AssertEqual(Task task, TaskModel taskModel)
+        {
+            Assert.Equal(task.Name, taskModel.Name);
+            Assert.Equal(task.Background, taskModel.Background);
+            Assert.Equal(task.Customer.Id, taskModel.CustomerId);
+            Assert.Equal(task.Customer.Name, taskModel.CustomerName);
+            Assert.Equal(task.Goal, taskModel.Goal);
+            Assert.Equal(task.TimeType, taskModel.TimeType);
+            Assert.Equal(task.Project.Id, taskModel.ProjectId);
+            Assert.Equal(task.Project.Name, taskModel.ProjectName);
+            Assert.Equal(task.StartDateTime, taskModel.StartDateTime);
+            Assert.Equal(task.EndDateTime, taskModel.EndDateTime);
+            Assert.Equal(task.DateCreated, taskModel.DateCreated);
+            Assert.Equal(task.DateModified, taskModel.DateModified);
+            Assert.Equal(task.Id, taskModel.Id);
+            Assert.Equal(task.TimeReports.Count, taskModel.TimeReports.Count);
+        }
+
+        private void AssertEqual(Data.Entities.TimeReport report, TimeReportModel reportModel)
+        {
+            Assert.Equal(report.Date, reportModel.Date);
+            Assert.Equal(report.TimeWorked, reportModel.TimeWorkedInHours);
+            Assert.Equal(report.Id, reportModel.Id);
+            Assert.Equal(report.DateCreated, reportModel.DateCreated);
+            Assert.Equal(report.DateModified, reportModel.DateModified);
+        }
+
     }
 }
