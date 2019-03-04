@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using AutoFixture;
 using AutoMapper;
 using TimeReport.Data.Entities;
@@ -9,7 +6,7 @@ using TimeReport.Web.Api.Models;
 using TimeReport.Web.Api.Models.Mapping;
 using Xunit;
 
-namespace TimeReport.UnitTests
+namespace TimeReport.UnitTests.Mappings
 {
     public class CustomerToCustomerModelMappingFixture
     {

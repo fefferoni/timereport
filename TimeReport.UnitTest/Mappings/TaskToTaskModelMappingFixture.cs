@@ -6,7 +6,7 @@ using TimeReport.Web.Api.Models;
 using TimeReport.Web.Api.Models.Mapping;
 using Xunit;
 
-namespace TimeReport.UnitTests
+namespace TimeReport.UnitTests.Mappings
 {
     public class TaskToTaskModelMappingFixture
     {
